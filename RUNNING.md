@@ -18,9 +18,9 @@ Should get around 82.7%, up to 83.0% if using 500/500 samples
 ### Training/Testing: Flavor LSTM
 
 ```
-python -m tracegen_rnn.train_flav_lstm --flav_map_fn resources/maps/flav_map.txt --train_flavs resources/traces/v1.train.txt --test_flavs resources/traces/v1.dev.txt --device cuda:0 --seq_len 500 --batch_size 100 --range_start 0 --range_stop 1800000 --max_iters 10 --lr 5e-3 --weight_decay 1e-5 --nlayers 2 --nhidden 200 --model_save_fn resources/models/test_flav_model.pt
+python -m tracegen_rnn.train_flav_lstm --flav_map_fn resources/maps/flav_map.txt --train_flavs resources/traces/v1.train.txt --test_flavs resources/traces/v1.dev.txt --device cpu:0 --seq_len 500 --batch_size 100 --range_start 0 --range_stop 1800000 --max_iters 10 --lr 5e-3 --weight_decay 1e-5 --nlayers 2 --nhidden 200 --model_save_fn resources/models/test_flav_model.pt
 
-python -m tracegen_rnn.evaluate_flav_lstm --flav_map_fn resources/maps/flav_map.txt --test_flavs resources/traces/v1.test.txt --device cuda:0 --seq_len 500 --batch_size 100 --range_start 0 --range_stop 1800000 --lstm_model resources/models/test_flav_model.pt
+python -m tracegen_rnn.evaluate_flav_lstm --flav_map_fn resources/maps/flav_map.txt --test_flavs resources/traces/v1.test.txt --device cpu:0 --seq_len 500 --batch_size 100 --range_start 0 --range_stop 1800000 --lstm_model resources/models/test_flav_model.pt
 ```
 
 Should get a NLL of around 0.67, with a 1-Best-Err rate of 26%.
@@ -28,9 +28,9 @@ Should get a NLL of around 0.67, with a 1-Best-Err rate of 26%.
 ### Training/Testing: Duration LSTM
 
 ```
-python -m tracegen_rnn.train_dur_lstm --flav_map_fn resources/maps/flav_map.txt --interval_map_fn resources/maps/v1.interval_map.txt --bsize_map_fn resources/maps/batch_size_map.txt --train_flavs resources/traces/v1.train.txt --train_durs resources/traces/v1.train.c1800000.txt --test_flavs resources/traces/v1.dev.txt --test_durs resources/traces/v1.dev.c2100000.txt --device cuda:0 --seq_len 500 --batch_size 100 --range_start 0 --range_stop 1800000 --max_iters 60 --lr 5e-3 --weight_decay 5e-6 --nlayers 2 --nhidden 256 --model_save_fn resources/models/test_dur_model.pt
+python -m tracegen_rnn.train_dur_lstm --flav_map_fn resources/maps/flav_map.txt --interval_map_fn resources/maps/v1.interval_map.txt --bsize_map_fn resources/maps/batch_size_map.txt --train_flavs resources/traces/v1.train.txt --train_durs resources/traces/v1.train.c1800000.txt --test_flavs resources/traces/v1.dev.txt --test_durs resources/traces/v1.dev.c2100000.txt --device cpu:0 --seq_len 500 --batch_size 100 --range_start 0 --range_stop 1800000 --max_iters 60 --lr 5e-3 --weight_decay 5e-6 --nlayers 2 --nhidden 256 --model_save_fn resources/models/test_dur_model.pt
 
-python -m tracegen_rnn.evaluate_dur_lstm --flav_map_fn resources/maps/flav_map.txt --interval_map_fn resources/maps/v1.interval_map.txt --bsize_map_fn resources/maps/batch_size_map.txt --test_flavs resources/traces/v1.test.txt --test_durs resources/traces/v1.test.c2591400.txt --device cuda:0 --seq_len 500 --batch_size 100 --range_start 0 --range_stop 1800000 --lstm_model resources/models/test_dur_model.pt 
+python -m tracegen_rnn.evaluate_dur_lstm --flav_map_fn resources/maps/flav_map.txt --interval_map_fn resources/maps/v1.interval_map.txt --bsize_map_fn resources/maps/batch_size_map.txt --test_flavs resources/traces/v1.test.txt --test_durs resources/traces/v1.test.c2591400.txt --device cpu:0 --seq_len 500 --batch_size 100 --range_start 0 --range_stop 1800000 --lstm_model resources/models/test_dur_model.pt 
 ```
 
 Should get a BCE of around 0.129 and a 1-Best-Err rate of 29%.
